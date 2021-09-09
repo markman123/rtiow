@@ -10,6 +10,15 @@ pub type Point3 = Vec3;
 pub type Color = Vec3;
 
 impl Vec3 {
+    pub fn format_color(self) -> String {
+        format!(
+            "{} {} {}",
+            (255.999 * self[0]) as u64,
+            (255.999 * self[1]) as u64,
+            (255.999 * self[2]) as u64
+        )
+    }
+
     pub fn new(e0: f64, e1: f64, e2: f64) -> Self {
         Self { e: [e0, e1, e2] }
     }
@@ -110,6 +119,15 @@ impl Mul<f64> for Vec3 {
     fn mul(self, rhs: f64) -> Self::Output {
         Self::Output {
             e: [self[0] * rhs, self[1] * rhs, self[2] * rhs],
+        }
+    }
+}
+impl Mul<Vec3> for f64 {
+    type Output = Vec3;
+
+    fn mul(self, rhs: Vec3) -> Self::Output {
+        Self::Output {
+            e: [rhs[0] * self, rhs[1] * self, rhs[2] * self],
         }
     }
 }
