@@ -160,15 +160,16 @@ impl DivAssign<f64> for Vec3 {
 
 mod test {
 
-    use super::Vec3;
     #[test]
     fn test_vec_add() {
+        use super::Vec3;
         let result = Vec3::new(0.0, 0.0, 0.0) + Vec3::new(1.0, 1.0, 1.0);
         assert_eq!(result, Vec3::new(1.0, 1.0, 1.0));
     }
 
     #[test]
     fn test_vec_mult() {
+        use super::Vec3;
         let result = Vec3::new(5.0, 5.0, 1.0) * 3.0;
         assert_eq!(result, Vec3::new(15.0, 15.0, 3.0));
     }
