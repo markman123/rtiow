@@ -1,4 +1,6 @@
+mod hit;
 mod ray;
+mod sphere;
 mod vec;
 
 use ray::Ray;
@@ -6,14 +8,14 @@ use vec::{Color, Point3, Vec3};
 
 fn hit_sphere(center: Point3, radius: f64, r: &Ray) -> f64 {
     let oc = r.origin() - center; // distance from origin to the centre of the sphere
-    let a = r.direction().dot(r.direction());
-    let b = 2.0 * oc.dot(r.direction());
-    let c = oc.dot(oc) - radius * radius;
-    let discriminant = b * b - 4.0 * a * c;
+    let a = r.direction().length().powi(2);
+    let half_b = oc.dot(r.direction());
+    let c = oc.length().powi(2) - radius * radius;
+    let discriminant = half_b * half_b - a * c;
     if discriminant < 0.0 {
         -1.0
     } else {
-        (-b - discriminant.sqrt()) / (2.0 * a)
+        (-half_b - discriminant.sqrt()) / a
     }
 }
 fn ray_color(r: &Ray) -> Color {
